@@ -57,7 +57,7 @@ def scale_y(y):
 
     **y** — y-координата модели.
     """
-    return int(y*scale_factor) + window_width//2
+    return -int(y*scale_factor) + window_height//2
 
 
 
@@ -85,4 +85,4 @@ class DrawableObject:
         self.obj = obj
 
     def draw(self, surface):
-        pg.draw.circle(surface, self.obj.color, (self.obj.x, self.obj.y), self.obj.r)
+        pg.draw.circle(surface, self.obj.color, (scale_x(self.obj.x), scale_y(self.obj.y)), self.obj.R)
