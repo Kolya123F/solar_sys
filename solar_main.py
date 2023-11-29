@@ -16,6 +16,7 @@ timer = None
 
 alive = True
 
+SPF =(1.0/60)
 perform_execution = False
 """Флаг цикличности выполнения расчёта"""
 
@@ -149,6 +150,7 @@ def main():
     height = 700
     screen = pg.display.set_mode((width, height))
     last_time = time.perf_counter()
+    draw_time_last= last_time
     drawer = Drawer(screen)
     menu, box, timer = init_ui(screen)
     perform_execution = False
@@ -162,7 +164,11 @@ def main():
             timer.set_text(text)
 
         last_time = cur_time
-        drawer.update(space_objects, box)
+        draw_time_current = time.perf_counter()
+
+        if(draw_time_current-draw_time_last)>SPF:
+            drawer.update(space_objects, box)
+            draw_time_last=draw_time_current
         #time.sleep(1.0 / 60)
 
 
