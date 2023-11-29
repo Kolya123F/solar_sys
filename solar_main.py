@@ -89,7 +89,7 @@ def slider_to_real(val):
 
 def slider_reaction(event):
     global time_scale
-    time_scale = slider_to_real(event.el.get_value())
+    time_scale = 10*slider_to_real(event.el.get_value())
 
 def init_ui(screen):
     global browser
@@ -151,7 +151,7 @@ def main():
     last_time = time.perf_counter()
     drawer = Drawer(screen)
     menu, box, timer = init_ui(screen)
-    perform_execution = True
+    perform_execution = False
 
     while alive:
         handle_events(pg.event.get(), menu)
@@ -163,7 +163,9 @@ def main():
 
         last_time = cur_time
         drawer.update(space_objects, box)
-        time.sleep(1.0 / 60)
+        #time.sleep(1.0 / 60)
+
+
 
     print('Modelling finished!')
 
