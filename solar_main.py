@@ -7,6 +7,8 @@ from solar_model import *
 from solar_input import *
 from solar_objects import *
 import thorpy
+import tkinter as tk
+from tkinter import filedialog
 import time
 import numpy as np
 
@@ -68,7 +70,9 @@ def open_file():
     global model_time
 
     model_time = 0.0
-    in_filename = "solar_system.txt"
+
+    in_filename = filedialog.askopenfilename(filetypes=(("Text file", ".txt"),))
+    #in_filename = "solar_system.txt"
     space_objects = read_space_objects_data_from_file(in_filename)
     max_distance = max([max(abs(obj.obj.x), abs(obj.obj.y)) for obj in space_objects])
     calculate_scale_factor(max_distance)
@@ -94,6 +98,7 @@ def init_ui(screen):
     button_stop = thorpy.make_button("Quit", func=stop_execution)
     button_pause = thorpy.make_button("Pause", func=pause_execution)
     button_play = thorpy.make_button("Play", func=start_execution)
+
     timer = thorpy.OneLineText("Seconds passed")
 
     button_load = thorpy.make_button(text="Load a file", func=open_file)
